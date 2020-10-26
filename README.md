@@ -16,8 +16,8 @@ make a CRUD page to register, login and see the profiles of the students
 - [x] require all columns 
 - [x] test if it works
 ### 3: get from database
-- [ ] create a table with the information on index.php
-- [ ] add a link to the personal profile page
+- [x] create a table with the information on index.php
+- [x] add a link to the personal profile page
 
 ### 4: the profile page
 - [ ] get the required user's details
