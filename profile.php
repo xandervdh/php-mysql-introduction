@@ -8,7 +8,7 @@ error_reporting(E_ALL);
 require 'model/Connection.php';
 
 $connection = new Connection();
-$students = $connection->getAllData();
+$student = $connection->getProfile();
 
 ?>
 
@@ -27,9 +27,7 @@ $students = $connection->getAllData();
 <body>
 
 <?php
-foreach ($students as $student) {
-    echo 'name: ' . $student['first_name'] . ' ' . $student['last_name'] . ' email: ' . $student['email'] . 'created at: ' . $student['created_at'] . ' <a href="profile.php?user=' . $student['id'] . '">Profile</a><br>';
-}
+echo 'Name: ' . $student['first_name'] . ' ' . $student['last_name'] . '<br>Email: ' . $student['email'] . '<br>Created at: ' . $student['created_at'];
 ?>
 <a href="profile.php?user="></a>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -43,3 +41,4 @@ foreach ($students as $student) {
         crossorigin="anonymous"></script>
 </body>
 </html>
+

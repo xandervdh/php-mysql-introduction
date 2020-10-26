@@ -20,10 +20,10 @@ make a CRUD page to register, login and see the profiles of the students
 - [x] add a link to the personal profile page
 
 ### 4: the profile page
-- [ ] get the required user's details
-- [ ] print them out
-- [ ] include a be like bill meme from the api
-- [ ] every column of the database needs to be shown someway
+- [x] get the required user's details
+- [x] print them out
+- [ ] include a "be like Bill" meme from the api
+- [x] every column of the database needs to be shown someway
 - [ ] make sure it's a coherent page
 
 ### 5: register and login

@@ -32,11 +32,20 @@ class Connection {
         $handler->execute([$student->getFirstName(), $student->getLastName(), $student->getEmail()]);
     }
 
-    public function getData()
+    public function getAllData()
     {
         $handler = $this->pdo->prepare('SELECT id, first_name, last_name, email, created_at FROM students');
         $handler->execute();
         $students = $handler->fetchAll();
         return $students;
+    }
+
+    public function getProfile()
+    {
+        $handler = $this->pdo->prepare('SELECT first_name, last_name, email, created_at FROM students WHERE id = :id');
+        $handler->bindValue(':id', $_GET['user']);
+        $handler->execute();
+        $student = $handler->fetch();
+        return $student;
     }
 }
