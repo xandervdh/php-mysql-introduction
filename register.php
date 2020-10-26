@@ -8,7 +8,11 @@ error_reporting(E_ALL);
 require 'model/Auth.php';
 require 'model/Connection.php';
 require 'model/Student.php';
+session_start();
 
+$authConnection = new Connection();
+$pdo = $authConnection->openDB();
+$authorization = new Auth();
 $error = 'style="border-color: red"';
 $firstName = $lastName = $email = "";
 $firstNameError = $lastNameError = $emailError = "";
@@ -18,35 +22,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($_POST['firstName'])) {
         $firstNameErrorMessage = 'First name is required';
         $firstNameError = $error;
-    } /*else {
+    } else {
         $firstName = check_input($_POST['firstName']);
-        if (!preg_match("/^[a-zA-Z-' ]*$/", $firstName)) {
+        $firstNameErrorMessage = $authorization->nameValidation($firstName);
+        if (!empty($firstNameErrorMessage)) {
             $firstNameError = $error;
-            $firstNameErrorMessage = "Only letters and white space allowed";
-        }
-    }*/
+        } else {$_SESSION['firstName'] = $firstName;}
+    }
 
     if (empty($_POST['lastName'])) {
         $lastNameErrorMessage = 'Last name is required';
         $lastNameError = $error;
-    } /*else {
+    } else {
         $lastName = check_input($_POST['lastName']);
-        if (!preg_match("/^[a-zA-Z-' ]*$/", $lastName)) {
+        $lastNameErrorMessage = $authorization->nameValidation($lastName);
+        if (!empty($lastNameErrorMessage)) {
             $lastNameError = $error;
-            $lastNameErrorMessage = "Only letters and white space allowed";
-        }
-    }*/
+        } else {$_SESSION['lastName'] = $lastName;}
+    }
 
     if (empty($_POST['email'])) {
         $emailErrorMessage = 'Email is required';
         $emailError = $error;
-    } /*else {
+    } else {
         $email = $_POST['email'];
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) { //check if input has a valid email
+        $emailErrorMessage = $authorization->emailValidation($email, $pdo);
+        if (!empty($emailErrorMessage)) { //check if input has a valid email
             $emailError = $error; //give error style
-            $emailErrorMessage = "Invalid email format"; //give error message
-        }
-    }*/
+        } else {$_SESSION['email'] = $email;}
+    }
 
     if (empty($firstNameErrorMessage && $lastNameErrorMessage && $emailErrorMessage)){
         $student = new Student($firstName, $lastName, $email);
@@ -83,13 +87,13 @@ function check_input($data)
     <span class="required">* = required</span>
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
         <label for="firstName">First name</label><br>
-        <input type="text" name="firstName" id="firstName" <?php echo $firstNameError; ?>><br>
+        <input type="text" name="firstName" id="firstName" value="<?php echo $firstName ?>" <?php echo $firstNameError; ?>><br>
         <span class="required">* <?php echo $firstNameErrorMessage; ?></span><br>
         <label for="lastName">Last name</label><br>
-        <input type="text" name="lastName" id="lastName" <?php echo $lastNameError; ?>><br>
+        <input type="text" name="lastName" id="lastName" value="<?php echo $lastName ?>" <?php echo $lastNameError; ?>><br>
         <span class="required">* <?php echo $lastNameErrorMessage; ?></span><br>
         <label for="email">Email</label><br>
-        <input type="text" name="email" id="email" <?php echo $emailError; ?>><br>
+        <input type="text" name="email" id="email" value="<?php echo $email ?>" <?php echo $emailError; ?>><br>
         <span class="required">* <?php echo $emailErrorMessage; ?></span><br>
         <input type="submit" value="Submit">
     </form>

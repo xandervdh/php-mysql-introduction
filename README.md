@@ -27,10 +27,10 @@ make a CRUD page to register, login and see the profiles of the students
 - [ ] make sure it's a coherent page
 
 ### 5: register and login
-- [ ] create a login.php and fill up with a login form
-- [ ] rename insert.php to register.php and add password & password confirmation field
-- [ ] create auth.php and write login and registration logic
-- [ ] check if email is valid
+- [x] create a login.php and fill up with a login form
+- [x] rename insert.php to register.php and add password & password confirmation field
+- [x] create auth.php and write login and registration logic
+- [x] check if email is valid
 - [ ] check if password and password confirmation are equal
 - [ ] hash the password
 - [ ] if registration fails go back to previous form and fill in previously filled in data

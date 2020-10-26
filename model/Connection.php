@@ -10,7 +10,7 @@ class Connection {
     }
 
 
-    private function openDB()
+    public function openDB()
     {
         $dbhost = "localhost";
         $dbuser = "becode";
