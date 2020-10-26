@@ -31,7 +31,7 @@ foreach ($students as $student) {
     echo 'name: ' . $student['first_name'] . ' ' . $student['last_name'] . ' email: ' . $student['email'] . 'created at: ' . $student['created_at'] . ' <a href="profile.php?user=' . $student['id'] . '">Profile</a><br>';
 }
 ?>
-<a href="profile.php?user="></a>
+
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
