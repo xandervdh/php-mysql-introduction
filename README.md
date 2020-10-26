@@ -10,7 +10,7 @@ make a CRUD page to register, login and see the profiles of the students
 - [x] make a PDO connection in connection.php
 
 ### 2: insert
-- [ ] create index.php and insert.php
+- [x] create index.php and insert.php
 - [ ] include connection.php in both
 - [ ] create a form to fill the table in insert.php
 - [ ] require all columns 
