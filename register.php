@@ -5,6 +5,7 @@ ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
 
+require 'model/Auth.php';
 require 'model/Connection.php';
 require 'model/Student.php';
 
@@ -17,35 +18,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($_POST['firstName'])) {
         $firstNameErrorMessage = 'First name is required';
         $firstNameError = $error;
-    } else {
+    } /*else {
         $firstName = check_input($_POST['firstName']);
         if (!preg_match("/^[a-zA-Z-' ]*$/", $firstName)) {
             $firstNameError = $error;
             $firstNameErrorMessage = "Only letters and white space allowed";
         }
-    }
+    }*/
 
     if (empty($_POST['lastName'])) {
         $lastNameErrorMessage = 'Last name is required';
         $lastNameError = $error;
-    } else {
+    } /*else {
         $lastName = check_input($_POST['lastName']);
         if (!preg_match("/^[a-zA-Z-' ]*$/", $lastName)) {
             $lastNameError = $error;
             $lastNameErrorMessage = "Only letters and white space allowed";
         }
-    }
+    }*/
 
     if (empty($_POST['email'])) {
         $emailErrorMessage = 'Email is required';
         $emailError = $error;
-    } else {
+    } /*else {
         $email = $_POST['email'];
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) { //check if input has a valid email
             $emailError = $error; //give error style
             $emailErrorMessage = "Invalid email format"; //give error message
         }
-    }
+    }*/
 
     if (empty($firstNameErrorMessage && $lastNameErrorMessage && $emailErrorMessage)){
         $student = new Student($firstName, $lastName, $email);
