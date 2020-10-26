@@ -7,10 +7,12 @@ class Auth {
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
             return 'Invalid email adress!';
         }
-        $handler = $pdo->prepare('SELECT first_name FROM students WHERE email = :email');
+        $handler = $pdo->prepare('SELECT email FROM students WHERE email = :email');
         $handler->bindValue(':email', $email);
+        $handler->execute();
+        $dbEmail = $handler->fetch();
 
-        if ($handler->execute()){
+        if ($dbEmail['email'] === $email){
             return 'Email is already in use!';
         }
         return "";
@@ -21,6 +23,7 @@ class Auth {
         if (!preg_match("/^[a-zA-Z-' ]*$/", $name)) {
             return 'Only letters and white space allowed';
         }
+        return "";
     }
 
 }
