@@ -29,7 +29,7 @@ $student = $connection->getProfile();
 <?php
 echo 'Name: ' . $student['first_name'] . ' ' . $student['last_name'] . '<br>Email: ' . $student['email'] . '<br>Created at: ' . $student['created_at'];
 ?>
-<img alt="be like bill meme" src="https://belikebill.ga/billgen-API.php?default=1&name=<?php echo $student['first_name'] ?>" />
+
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
