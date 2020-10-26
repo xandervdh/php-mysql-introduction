@@ -1,4 +1,5 @@
 .idea/
 .git/
 style/stylesheet.css.map
+style/stylesheet.css
 connection.php
