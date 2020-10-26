@@ -5,7 +5,8 @@ ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
 
-require 'connection.php';
+require 'model/Connection.php';
+require 'model/Student.php';
 
 $error = 'style="border-color: red"';
 $firstName = $lastName = $email = "";
@@ -45,6 +46,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $emailErrorMessage = "Invalid email format"; //give error message
         }
     }
+
+    if (empty($firstNameErrorMessage && $lastNameErrorMessage && $emailErrorMessage)){
+        $student = new Student($firstName, $lastName, $email);
+        $connection = new Connection();
+        $connection->insertData($student);
+    }
 }
 
 function check_input($data)
@@ -78,10 +85,10 @@ function check_input($data)
         <input type="text" name="firstName" id="firstName" <?php echo $firstNameError; ?>><br>
         <span class="required">* <?php echo $firstNameErrorMessage; ?></span><br>
         <label for="lastName">Last name</label><br>
-        <input type="text" id="lastName" <?php echo $lastNameError; ?>><br>
+        <input type="text" name="lastName" id="lastName" <?php echo $lastNameError; ?>><br>
         <span class="required">* <?php echo $lastNameErrorMessage; ?></span><br>
         <label for="email">Email</label><br>
-        <input type="text" id="email" <?php echo $emailError; ?>><br>
+        <input type="text" name="email" id="email" <?php echo $emailError; ?>><br>
         <span class="required">* <?php echo $emailErrorMessage; ?></span><br>
         <input type="submit" value="Submit">
     </form>

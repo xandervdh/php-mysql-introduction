@@ -2,4 +2,4 @@
 .git/
 style/stylesheet.css.map
 style/stylesheet.css
-connection.php
+model/Connection.php
