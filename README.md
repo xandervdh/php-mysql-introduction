@@ -37,8 +37,8 @@ make a CRUD page to register, login and see the profiles of the students
 - [x] if the registration succeeds go to profile.php
 - [x] check if filled in email can be found on a user with that credential
 - [x] check if password matched with password in database
-- [ ] if there is an error go back to login page giving an error
-- [ ] if it's correct go to index.php
+- [x] if there is an error go back to login page giving an error
+- [x] if it's correct go to index.php
 - [ ] make sure only logged in people can see index.php
 
 ### 6: edit and delete
