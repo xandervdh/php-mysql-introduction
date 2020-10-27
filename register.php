@@ -61,25 +61,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($_POST['password'])) {
         $passwordErrorMessage = 'Password is required';
         $passwordError = $error;
-    } /*else {
-        $password = $_POST['password'];
-        //$passwordErrorMessage = $authorization->passwordValidation($password, $_POST['passwordConfirm']);
-        if (!empty($passwordErrorMessage)) { //check if input has a valid email
-            $passwordError = $error; //give error style
-        } else {$_SESSION['password'] = $password;}
-    }*/
+    }
 
     if (empty($_POST['passwordConfirm'])) {
         $passwordConfirmErrorMessage = 'Password confirmation is required';
         $passwordConfirmError = $error;
-    } /*else {
-        $passwordConfirm = $_POST['passwordConfirm'];
-        $passwordErrorMessage = $authorization->passwordValidation($password, $passwordConfirm);
-        if (!empty($passwordErrorMessage)) { //check if input has a valid email
-            $passwordConfirmError = $error; //give error style
-            $passwordConfirmErrorMessage = "";
-        } else {$_SESSION['passwordConfirm'] = $passwordConfirm;}
-    }*/
+    }
 
     if (empty($passwordConfirmErrorMessage) && empty($passwordErrorMessage)) {
         $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
@@ -96,7 +83,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if (empty($firstNameErrorMessage) && empty($lastNameErrorMessage) && empty($emailErrorMessage) && empty($passwordErrorMessage)) {
-        $student = new Student($firstName, $lastName, $email);
+        $student = new Student($firstName, $lastName, $email, $password);
         $connection = new Connection();
         $connection->insertData($student);
     }

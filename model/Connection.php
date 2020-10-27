@@ -28,8 +28,8 @@ class Connection {
 
     public function insertData(Student $student): void
     {
-        $handler = $this->pdo->prepare('INSERT INTO students (first_name, last_name, email) VALUES (?, ?, ?)');
-        $handler->execute([$student->getFirstName(), $student->getLastName(), $student->getEmail()]);
+        $handler = $this->pdo->prepare('INSERT INTO students (first_name, last_name, email, password) VALUES (?, ?, ?, ?)');
+        $handler->execute([$student->getFirstName(), $student->getLastName(), $student->getEmail(), $student->getPassword()]);
     }
 
     public function getAllData(): array
