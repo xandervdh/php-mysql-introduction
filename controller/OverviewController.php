@@ -10,9 +10,16 @@ require 'model/Connection.php';
 class OverviewController {
     public function render()
     {
+        session_start();
+        if (isset($_SESSION['user'])){
+            $view = 'view/overview.php';
+        } else {
+            $view = 'view/error.php';
+        }
+
         $connection = new Connection();
         $students = $connection->getAllData();
 
-        require 'view/overview.php';
+        require $view;
     }
 }
