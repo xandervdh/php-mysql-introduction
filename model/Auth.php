@@ -2,17 +2,14 @@
 
 class Auth {
 
-    public function emailValidation(string $email, PDO $pdo)
+    public function emailValidation(string $email)
     {
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
             return 'Invalid email adress!';
         }
-        $handler = $pdo->prepare('SELECT email FROM students WHERE email = :email');
-        $handler->bindValue(':email', $email);
-        $handler->execute();
-        $dbEmail = $handler->fetch();
+        $connection = new Connection();
 
-        if ($dbEmail['email'] === $email){
+        if ($connection->checkEmail($email) == true){
             return 'Email is already in use!';
         }
         return "";

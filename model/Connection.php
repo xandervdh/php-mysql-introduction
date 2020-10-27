@@ -26,13 +26,13 @@ class Connection {
         return new PDO('mysql:host=' . $dbhost . ';dbname=' . $db, $dbuser, $dbpass, $driverOptions);
     }
 
-    public function insertData(Student $student)
+    public function insertData(Student $student): void
     {
         $handler = $this->pdo->prepare('INSERT INTO students (first_name, last_name, email) VALUES (?, ?, ?)');
         $handler->execute([$student->getFirstName(), $student->getLastName(), $student->getEmail()]);
     }
 
-    public function getAllData()
+    public function getAllData(): array
     {
         $handler = $this->pdo->prepare('SELECT id, first_name, last_name, email, created_at FROM students');
         $handler->execute();
@@ -40,12 +40,26 @@ class Connection {
         return $students;
     }
 
-    public function getProfile()
+    public function getProfile(): array
     {
         $handler = $this->pdo->prepare('SELECT first_name, last_name, email, created_at FROM students WHERE id = :id');
         $handler->bindValue(':id', $_GET['user']);
         $handler->execute();
         $student = $handler->fetch();
         return $student;
+    }
+
+    public function checkEmail(string $email): bool
+    {
+        $handler = $this->pdo->prepare('SELECT email FROM students WHERE email = :email');
+        $handler->bindValue(':email', $email);
+        $handler->execute();
+        if ($handler->fetch()){
+            return true;
+        } else {
+            return false;
+        }
+        /*$dbEmail = $handler->fetch();
+        return $dbEmail;*/
     }
 }
