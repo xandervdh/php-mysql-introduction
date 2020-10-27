@@ -35,8 +35,8 @@ make a CRUD page to register, login and see the profiles of the students
 - [x] hash the password
 - [x] if registration fails go back to previous form and fill in previously filled in data
 - [x] if the registration succeeds go to profile.php
-- [ ] check if filled in email can be found on a user with that credential
-- [ ] check if password matched with password in database
+- [x] check if filled in email can be found on a user with that credential
+- [x] check if password matched with password in database
 - [ ] if there is an error go back to login page giving an error
 - [ ] if it's correct go to index.php
 - [ ] make sure only logged in people can see index.php
