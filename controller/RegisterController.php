@@ -13,7 +13,6 @@ class RegisterController {
     {
         session_start();
 
-        $action = "";
         $view = 'view/register.php';
         $authorization = new Auth();
         $error = 'style="border-color: red"';
@@ -90,8 +89,6 @@ class RegisterController {
                 $connection = new Connection();
                 $connection->insertData($student);
                 $id = $connection->getId($email);
-                $action = "?user=" . $id['id'];
-                //$_GET['user'] = $id['id'];
                 $view = 'view/register_complete.php';
             }
         }

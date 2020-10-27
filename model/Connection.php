@@ -68,4 +68,12 @@ class Connection {
         $handler->execute();
         return $handler->fetch();
     }
+
+    public function getHash(string $email)
+    {
+        $handler = $this->pdo->prepare('SELECT password FROM students WHERE email = :email');
+        $handler->bindValue(':email', $email);
+        $handler->execute();
+        return $handler->fetch();
+    }
 }
