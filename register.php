@@ -27,7 +27,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $firstNameErrorMessage = $authorization->nameValidation($firstName);
         if (!empty($firstNameErrorMessage)) {
             $firstNameError = $error;
-        } else {$_SESSION['firstName'] = $firstName;}
+        } else {
+            $_SESSION['firstName'] = $firstName;
+        }
     }
 
     if (empty($_POST['lastName'])) {
@@ -38,7 +40,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $lastNameErrorMessage = $authorization->nameValidation($lastName);
         if (!empty($lastNameErrorMessage)) {
             $lastNameError = $error;
-        } else {$_SESSION['lastName'] = $lastName;}
+        } else {
+            $_SESSION['lastName'] = $lastName;
+        }
     }
 
     if (empty($_POST['email'])) {
@@ -46,29 +50,52 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $emailError = $error;
     } else {
         $email = $_POST['email'];
-        $emailErrorMessage = $authorization->emailValidation($email, $pdo);
+        $emailErrorMessage = $authorization->emailValidation($email);
         if (!empty($emailErrorMessage)) { //check if input has a valid email
             $emailError = $error; //give error style
-        } else {$_SESSION['email'] = $email;}
+        } else {
+            $_SESSION['email'] = $email;
+        }
     }
 
     if (empty($_POST['password'])) {
         $passwordErrorMessage = 'Password is required';
         $passwordError = $error;
-    } else {
+    } /*else {
         $password = $_POST['password'];
-        $_SESSION['password'] = $password;
-    }
+        //$passwordErrorMessage = $authorization->passwordValidation($password, $_POST['passwordConfirm']);
+        if (!empty($passwordErrorMessage)) { //check if input has a valid email
+            $passwordError = $error; //give error style
+        } else {$_SESSION['password'] = $password;}
+    }*/
 
     if (empty($_POST['passwordConfirm'])) {
-        $emailErrorMessage = 'Password confirmation is required';
-        $emailError = $error;
-    } else {
+        $passwordConfirmErrorMessage = 'Password confirmation is required';
+        $passwordConfirmError = $error;
+    } /*else {
         $passwordConfirm = $_POST['passwordConfirm'];
-        $_SESSION['passwordConfirm'] = $passwordConfirm;
+        $passwordErrorMessage = $authorization->passwordValidation($password, $passwordConfirm);
+        if (!empty($passwordErrorMessage)) { //check if input has a valid email
+            $passwordConfirmError = $error; //give error style
+            $passwordConfirmErrorMessage = "";
+        } else {$_SESSION['passwordConfirm'] = $passwordConfirm;}
+    }*/
+
+    if (empty($passwordConfirmErrorMessage) && empty($passwordErrorMessage)) {
+        $password = $_POST['password'];
+        $passwordConfirm = $_POST['passwordConfirm'];
+        $passwordErrorMessage = $authorization->passwordValidation($password, $passwordConfirm);
+        if (!empty($passwordErrorMessage)) {
+            $passwordConfirmError = $error;
+            $passwordError = $error;
+            $passwordConfirmErrorMessage = $passwordErrorMessage;
+        } else {
+            $_SESSION['password'] = $password;
+            $_SESSION['passwordConfirm'] = $passwordConfirm;
+        }
     }
 
-    if (empty($firstNameErrorMessage) && empty($lastNameErrorMessage) && empty($emailErrorMessage)){
+    if (empty($firstNameErrorMessage) && empty($lastNameErrorMessage) && empty($emailErrorMessage) && empty($passwordErrorMessage)) {
         $student = new Student($firstName, $lastName, $email);
         $connection = new Connection();
         $connection->insertData($student);
@@ -103,11 +130,13 @@ function check_input($data)
     <span class="required">* = required</span>
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
         <label for="firstName">First name</label><br>
-        <input type="text" name="firstName" id="firstName" value="<?php echo $firstName ?>" <?php echo $firstNameError; ?>><br>
+        <input type="text" name="firstName" id="firstName"
+               value="<?php echo $firstName ?>" <?php echo $firstNameError; ?>><br>
         <span class="required">* <?php echo $firstNameErrorMessage; ?></span><br>
 
         <label for="lastName">Last name</label><br>
-        <input type="text" name="lastName" id="lastName" value="<?php echo $lastName ?>" <?php echo $lastNameError; ?>><br>
+        <input type="text" name="lastName" id="lastName"
+               value="<?php echo $lastName ?>" <?php echo $lastNameError; ?>><br>
         <span class="required">* <?php echo $lastNameErrorMessage; ?></span><br>
 
         <label for="email">Email</label><br>
@@ -115,11 +144,13 @@ function check_input($data)
         <span class="required">* <?php echo $emailErrorMessage; ?></span><br>
 
         <label for="password">Password</label><br>
-        <input type="text" name="password" id="password" value="<?php echo $password ?>" <?php echo $passwordError; ?>><br>
+        <input type="text" name="password" id="password"
+               value="<?php echo $password ?>" <?php echo $passwordError; ?>><br>
         <span class="required">* <?php echo $passwordErrorMessage; ?></span><br>
 
         <label for="passwordConfirm">Confirm password</label><br>
-        <input type="text" name="passwordConfirm" id="passwordConfirm" value="<?php echo $passwordConfirm ?>" <?php echo $passwordConfirmError; ?>><br>
+        <input type="text" name="passwordConfirm" id="passwordConfirm"
+               value="<?php echo $passwordConfirm ?>" <?php echo $passwordConfirmError; ?>><br>
         <span class="required">* <?php echo $passwordConfirmErrorMessage; ?></span><br>
 
         <input type="submit" value="Submit">
