@@ -25,10 +25,10 @@ class Auth {
 
     public function passwordValidation(string $password, string $passwordConfirm): string
     {
-        if ($password !== $passwordConfirm){
-            return "Password and the password confirmation don't match";
+        if (password_verify($passwordConfirm, $password)){
+            return "";
         }
-        return "";
+        return "Password and the password confirmation don't match";
     }
 
 }

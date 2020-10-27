@@ -82,7 +82,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }*/
 
     if (empty($passwordConfirmErrorMessage) && empty($passwordErrorMessage)) {
-        $password = $_POST['password'];
+        $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
         $passwordConfirm = $_POST['passwordConfirm'];
         $passwordErrorMessage = $authorization->passwordValidation($password, $passwordConfirm);
         if (!empty($passwordErrorMessage)) {
@@ -144,13 +144,13 @@ function check_input($data)
         <span class="required">* <?php echo $emailErrorMessage; ?></span><br>
 
         <label for="password">Password</label><br>
-        <input type="text" name="password" id="password"
-               value="<?php echo $password ?>" <?php echo $passwordError; ?>><br>
+        <input type="password" name="password" id="password"
+            <?php echo $passwordError; ?>><br>
         <span class="required">* <?php echo $passwordErrorMessage; ?></span><br>
 
         <label for="passwordConfirm">Confirm password</label><br>
-        <input type="text" name="passwordConfirm" id="passwordConfirm"
-               value="<?php echo $passwordConfirm ?>" <?php echo $passwordConfirmError; ?>><br>
+        <input type="password" name="passwordConfirm" id="passwordConfirm"
+            <?php echo $passwordConfirmError; ?>><br>
         <span class="required">* <?php echo $passwordConfirmErrorMessage; ?></span><br>
 
         <input type="submit" value="Submit">
