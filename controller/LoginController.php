@@ -14,6 +14,7 @@ class LoginController
     {
         session_start();
 
+        $view = 'view/login.php';
         $authorization = new Auth();
         $error = 'style="border-color: red"';
         $firstName = $lastName = $email = "";
@@ -50,11 +51,11 @@ class LoginController
             }
 
             if (empty($firstNameErrorMessage && $lastNameErrorMessage && $emailErrorMessage)) {
-
+                $view = 'view/login_succes.php';
             }
         }
 
-        require 'view/login.php';
+        require $view;
     }
 
     public function check_input($data)
