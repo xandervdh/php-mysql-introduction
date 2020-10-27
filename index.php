@@ -1,13 +1,16 @@
 <?php
 declare(strict_types=1);
 
-if ($_GET['page'] == 'overview'){
+if ($_GET['page'] == 'overview') {
     require 'controller/OverviewController.php';
     $controller = new OverviewController();
-} elseif (isset($_GET['user'])){
+} elseif ($_GET['page'] == 'login') {
+    require 'controller/LoginController.php';
+    $controller = new LoginController();
+} elseif (isset($_GET['user'])) {
     require 'controller/ProfileController.php';
     $controller = new ProfileController();
-}else {
+} else {
     require 'controller/RegisterController.php';
     $controller = new RegisterController();
 }
