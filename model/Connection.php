@@ -59,7 +59,13 @@ class Connection {
         } else {
             return false;
         }
-        /*$dbEmail = $handler->fetch();
-        return $dbEmail;*/
+    }
+
+    public function getId(string $email)
+    {
+        $handler = $this->pdo->prepare('SELECT id FROM students WHERE email = :email');
+        $handler->bindValue(':email', $email);
+        $handler->execute();
+        return $handler->fetch();
     }
 }

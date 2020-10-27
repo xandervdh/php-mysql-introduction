@@ -13,6 +13,8 @@ class RegisterController {
     {
         session_start();
 
+        $action = "";
+        $view = 'view/register.php';
         $authorization = new Auth();
         $error = 'style="border-color: red"';
         $firstName = $lastName = $email = $password = $passwordConfirm = "";
@@ -87,10 +89,14 @@ class RegisterController {
                 $student = new Student($firstName, $lastName, $email, $password);
                 $connection = new Connection();
                 $connection->insertData($student);
+                $id = $connection->getId($email);
+                $action = "?user=" . $id['id'];
+                //$_GET['user'] = $id['id'];
+                $view = 'view/register_complete.php';
             }
         }
 
-        require 'view/register.php';
+        require $view;
     }
 
     public function check_input($data)

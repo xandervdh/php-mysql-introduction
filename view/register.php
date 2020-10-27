@@ -2,7 +2,7 @@
 
 <div id="form">
     <span class="required">* = required</span>
-    <form method="post" >
+    <form method="post" action="">
         <label for="firstName">First name</label><br>
         <input type="text" name="firstName" id="firstName"
                value="<?php echo $firstName ?>" <?php echo $firstNameError; ?>><br>
