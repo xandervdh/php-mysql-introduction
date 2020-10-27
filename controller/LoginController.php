@@ -14,6 +14,7 @@ class LoginController
     {
         session_start();
 
+        $connection = new Connection();
         $view = 'view/login.php';
         $authorization = new Auth();
         $error = 'style="border-color: red"';
@@ -52,9 +53,11 @@ class LoginController
 
             if (empty($firstNameErrorMessage && $lastNameErrorMessage && $emailErrorMessage)) {
                 $view = 'view/login_succes.php';
+                $id = $connection->getId($email);
+                $_SESSION['user'] = $id['id'];
             }
         }
-
+        var_dump($_SESSION);
         require $view;
     }
 

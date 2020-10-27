@@ -78,9 +78,6 @@ class RegisterController {
                     $passwordConfirmError = $error;
                     $passwordError = $error;
                     $passwordConfirmErrorMessage = $passwordErrorMessage;
-                } else {
-                    $_SESSION['password'] = $password;
-                    $_SESSION['passwordConfirm'] = $passwordConfirm;
                 }
             }
 
