@@ -1,8 +1,16 @@
 <?php
 declare(strict_types=1);
 
-require 'controller/RegisterController.php';
+if ($_GET['page'] == 'overview'){
+    require 'controller/OverviewController.php';
+    $controller = new OverviewController();
+} else {
+    require 'controller/RegisterController.php';
+    $controller = new RegisterController();
+}
+
+
 //if you choose a client show the homepage
-$controller = new RegisterController();
+
 //render the view
 $controller->render();
