@@ -4,7 +4,10 @@ declare(strict_types=1);
 if ($_GET['page'] == 'overview'){
     require 'controller/OverviewController.php';
     $controller = new OverviewController();
-} else {
+} elseif (isset($_GET['user'])){
+    require 'controller/ProfileController.php';
+    $controller = new ProfileController();
+}else {
     require 'controller/RegisterController.php';
     $controller = new RegisterController();
 }
