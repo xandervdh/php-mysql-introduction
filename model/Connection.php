@@ -77,13 +77,9 @@ class Connection {
         return $handler->fetch();
     }
 
-    public function updateProfile($firstName, $lastName, $email, $password, $id)
+    public function deleteProfile(int $id): void
     {
-        $handler = $this->pdo->prepare('UPDATE students SET first_name = :fisrt_name, last_name = :last_name, email = :email, password = :password WHERE id = :id');
-        $handler->bindValue(':first_name', $firstName);
-        $handler->bindValue(':last_name', $lastName);
-        $handler->bindValue(':email', $email);
-        $handler->bindValue(':password', $password);
+        $handler = $this->pdo->prepare('DELETE FROM students WHERE id = :id');
         $handler->bindValue(':id', $id);
         $handler->execute();
     }

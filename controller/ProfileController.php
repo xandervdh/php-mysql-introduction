@@ -34,6 +34,7 @@ class ProfileController
                 if ($id['id'] === $_SESSION['user']) {
                     $connection->deleteProfile(intval($id['id']));
                     session_destroy();
+                    $view = 'view/delete.php';
                 }
             }
         }
