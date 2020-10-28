@@ -6,6 +6,7 @@ ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
 
 require 'model/Connection.php';
+require 'model/Auth.php';
 
 class ProfileController
 {
@@ -17,10 +18,6 @@ class ProfileController
         if ($_SESSION['user'] === $_GET['user']){
             $show = 'display: block';
         }
-
-        $connection = new Connection();
-        $student = $connection->getProfile();
-        $id = $connection->getId($student['email']);
 
         require 'view/profile.php';
     }

@@ -42,7 +42,7 @@ class Connection {
 
     public function getProfile(): array
     {
-        $handler = $this->pdo->prepare('SELECT first_name, last_name, email, created_at FROM students WHERE id = :id');
+        $handler = $this->pdo->prepare('SELECT first_name, last_name, email, created_at, password FROM students WHERE id = :id');
         $handler->bindValue(':id', $_GET['user']);
         $handler->execute();
         $student = $handler->fetch();
@@ -75,5 +75,16 @@ class Connection {
         $handler->bindValue(':email', $email);
         $handler->execute();
         return $handler->fetch();
+    }
+
+    public function updateProfile($firstName, $lastName, $email, $password, $id)
+    {
+        $handler = $this->pdo->prepare('UPDATE students SET first_name = :fisrt_name, last_name = :last_name, email = :email, password = :password WHERE id = :id');
+        $handler->bindValue(':first_name', $firstName);
+        $handler->bindValue(':last_name', $lastName);
+        $handler->bindValue(':email', $email);
+        $handler->bindValue(':password', $password);
+        $handler->bindValue(':id', $id);
+        $handler->execute();
     }
 }
