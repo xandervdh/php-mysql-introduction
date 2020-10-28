@@ -25,12 +25,12 @@
             <label for="newPassword">New password</label><br>
             <input type="password" name="newPassword" id="newPassword"
                 <?php echo $newPasswordError; ?>><br>
-            <span class="required">* <?php echo $newPasswordErrorMessage; ?></span><br>
+            <span class="required"> <?php echo $newPasswordErrorMessage; ?></span><br>
 
             <label for="passwordConfirm">Confirm password</label><br>
             <input type="password" name="passwordConfirm" id="passwordConfirm"
                 <?php echo $passwordConfirmError; ?>><br>
-            <span class="required">* <?php echo $passwordConfirmErrorMessage; ?></span><br>
+            <span class="required"> <?php echo $passwordConfirmErrorMessage; ?></span><br>
 
             <input type="submit" value="Edit">
         </form>
