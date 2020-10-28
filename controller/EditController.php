@@ -7,7 +7,7 @@ error_reporting(E_ALL);
 
 require 'model/Connection.php';
 
-class ProfileController
+class EditController
 {
     public function render()
     {
