@@ -1,5 +1,6 @@
 <?php require 'includes/header.php'; ?>
-
+<div>
+    <a href="http://mysqlintroduction.local/?page=overview">Overview</a><br>
 <?php
 echo 'Name: ' . $student['first_name'] . ' ' . $student['last_name'] . '<br>Email: ' . $student['email'] . '<br>Created at: ' . $student['created_at'];
 
@@ -9,4 +10,5 @@ echo 'Name: ' . $student['first_name'] . ' ' . $student['last_name'] . '<br>Emai
         <input type="submit" name="action" value="Edit">
         <input type="submit" name="action" value="Delete">
     </form>
+</div>
 <?php require 'includes/footer.php'; ?>
