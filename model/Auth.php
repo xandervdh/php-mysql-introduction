@@ -1,7 +1,7 @@
 <?php
 
 class Auth {
-    public Connection $connection;
+    private Connection $connection;
 
     public function __construct()
     {
