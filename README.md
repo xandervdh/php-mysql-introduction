@@ -45,4 +45,4 @@ make a CRUD page to register, login and see the profiles of the students
 - [x] on profile.php check if logged in user id is the same as profile user id
 - [x] if ids are the same show edit and delete button
 - [x] when the buttons are clicked check if the user has the rights to do the action
-- [ ] once executed edit goes back to the profile and delete goes to register page
+- [x] once executed edit goes back to the profile and delete goes to register page
