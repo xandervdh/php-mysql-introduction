@@ -18,8 +18,5 @@ if ($_GET['page'] == 'overview') {
     $controller = new RegisterController();
 }
 
-
-//if you choose a client show the homepage
-
 //render the view
 $controller->render();

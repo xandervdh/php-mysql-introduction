@@ -83,4 +83,32 @@ class Connection {
         $handler->bindValue(':id', $id);
         $handler->execute();
     }
+
+    public function updateData(string $firstname, string $lastname, string $email): void
+    {
+        $handler = $this->pdo->prepare('UPDATE students SET first_name = :firstname, last_name = :lastname, email = :email WHERE email = :email');
+        $handler->bindValue(':firstname', $firstname);
+        $handler->bindValue(':lastname', $lastname);
+        $handler->bindValue(':email', $email);
+        $handler->execute();
+    }
+
+    public function updateDataPass(string $firstname, string $lastname, string $email, $password): void
+    {
+        $handler = $this->pdo->prepare('UPDATE students SET first_name = :firstname, last_name = :lastname, email = :email, password = :password WHERE email = :email');
+        $handler->bindValue(':firstname', $firstname);
+        $handler->bindValue(':lastname', $lastname);
+        $handler->bindValue(':email', $email);
+        $handler->bindValue(':password', $password);
+        $handler->execute();
+    }
+
+    public function getProfileEdit(): array
+    {
+        $handler = $this->pdo->prepare('SELECT first_name, last_name, email, created_at, password FROM students WHERE id = :id');
+        $handler->bindValue(':id', $_GET['edit']);
+        $handler->execute();
+        $student = $handler->fetch();
+        return $student;
+    }
 }
