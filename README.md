@@ -22,7 +22,7 @@ make a CRUD page to register, login and see the profiles of the students
 ### 4: the profile page
 - [x] get the required user's details
 - [x] print them out
-- [ ] include a "be like Bill" meme from the api
+- [ ] include a cat picture from the api
 - [x] every column of the database needs to be shown someway
 - [ ] make sure it's a coherent page
 
