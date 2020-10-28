@@ -10,6 +10,9 @@ if ($_GET['page'] == 'overview') {
 } elseif (isset($_GET['user'])) {
     require 'controller/ProfileController.php';
     $controller = new ProfileController();
+} elseif (isset($_GET['edit'])) {
+    require 'controller/EditController.php';
+    $controller = new EditController();
 } else {
     require 'controller/RegisterController.php';
     $controller = new RegisterController();

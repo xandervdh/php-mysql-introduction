@@ -30,11 +30,15 @@ class ProfileController
             $student = $connection->getProfile();
             $id = $connection->getId($student['email']);
 
-            if (isset($_POST['action']) && $_POST['action'] == 'Delete') {
+            if (isset($_POST['action'])) {
                 if ($id['id'] === $_SESSION['user']) {
-                    $connection->deleteProfile(intval($id['id']));
-                    session_destroy();
-                    $view = 'view/delete.php';
+                    if ($_POST['action'] == 'Delete'){
+                        $connection->deleteProfile(intval($id['id']));
+                        session_destroy();
+                        $view = 'view/delete.php';
+                    } elseif ($_POST['action'] == 'Edit'){
+                        $view = 'view/profileEdit.php';
+                    }
                 }
             }
         }
