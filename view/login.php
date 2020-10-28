@@ -1,6 +1,7 @@
 <?php require 'includes/header.php'; ?>
 
 <div id="form">
+    <a href="http://mysqlintroduction.local">Register</a>
     <span><?php echo $errorMessage; ?></span>
     <form method="post" action="">
         <label for="email">Email</label><br>

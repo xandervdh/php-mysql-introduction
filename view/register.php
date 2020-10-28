@@ -1,6 +1,7 @@
 <?php require 'includes/header.php' ?>
 
 <div id="form">
+    <a href="http://mysqlintroduction.local/?page=login">Login</a><br>
     <span class="required">* = required</span>
     <form method="post" action="">
         <label for="firstName">First name</label><br>
