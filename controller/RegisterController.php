@@ -87,6 +87,7 @@ class RegisterController {
                 $connection->insertData($student);
                 $id = $connection->getId($email);
                 $view = 'view/register_complete.php';
+                $_SESSION['user'] = $id['id'];
             }
         }
 

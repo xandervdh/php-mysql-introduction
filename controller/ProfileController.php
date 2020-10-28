@@ -14,11 +14,29 @@ class ProfileController
     {
         session_start();
 
-        $show = 'display: none';
-        if ($_SESSION['user'] === $_GET['user']){
-            $show = 'display: block';
+        if (!isset($_SESSION['user'])){
+            $view = 'view/error.php';
+        } else {
+            $view = 'view/profile.php';
         }
 
-        require 'view/profile.php';
+        if (isset($_SESSION['user'])) {
+            $show = 'display: none';
+            if ($_SESSION['user'] == $_GET['user']) {
+                $show = 'display: block';
+            }
+
+            $connection = new Connection();
+            $student = $connection->getProfile();
+            $id = $connection->getId($student['email']);
+
+            if (isset($_POST['action']) && $_POST['action'] == 'Delete') {
+                if ($id['id'] === $_SESSION['user']) {
+                    $connection->deleteProfile(intval($id['id']));
+                    session_destroy();
+                }
+            }
+        }
+        require $view;
     }
 }
