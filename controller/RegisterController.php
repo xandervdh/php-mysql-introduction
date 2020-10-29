@@ -1,18 +1,9 @@
 <?php
 declare(strict_types=1);
 
-ini_set('display_errors', '1');
-ini_set('display_startup_errors', '1');
-error_reporting(E_ALL);
-
-require 'model/Auth.php';
-require 'model/Connection.php';
-require 'model/Student.php';
 class RegisterController {
     public function render()
     {
-        session_start();
-
         $view = 'view/register.php';
         $authorization = new Auth();
         $error = 'style="border-color: red"';
