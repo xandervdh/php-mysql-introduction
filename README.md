@@ -4,6 +4,11 @@
 make a CRUD page to register, login and see the profiles of the students
 [here](exercise.md) is the exercise.
 
+## How to use?
+- clone repository
+- make database using [import.sql](recources/import.sql)
+- change user and password in the openDB() function in [connection.php](model/Connection.php)
+
 ## Checklist
 ### 1: the database
 - [x] make a database
