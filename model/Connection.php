@@ -28,13 +28,13 @@ class Connection {
 
     public function insertData(Student $student): void
     {
-        $handler = $this->pdo->prepare('INSERT INTO students (first_name, last_name, email, password) VALUES (?, ?, ?, ?)');
-        $handler->execute([$student->getFirstName(), $student->getLastName(), $student->getEmail(), $student->getPassword()]);
+        $handler = $this->pdo->prepare('INSERT INTO students (first_name, last_name, email, password, image) VALUES (?, ?, ?, ?, ?)');
+        $handler->execute([$student->getFirstName(), $student->getLastName(), $student->getEmail(), $student->getPassword(), $student->getImage()]);
     }
 
     public function getAllData(): array
     {
-        $handler = $this->pdo->prepare('SELECT id, first_name, last_name, email, created_at FROM students');
+        $handler = $this->pdo->prepare('SELECT id, first_name, last_name, email, created_at, image FROM students');
         $handler->execute();
         $students = $handler->fetchAll();
         return $students;
@@ -42,7 +42,7 @@ class Connection {
 
     public function getProfile(): array
     {
-        $handler = $this->pdo->prepare('SELECT first_name, last_name, email, created_at, password FROM students WHERE id = :id');
+        $handler = $this->pdo->prepare('SELECT first_name, last_name, email, created_at, password, image FROM students WHERE id = :id');
         $handler->bindValue(':id', $_GET['user']);
         $handler->execute();
         $student = $handler->fetch();

@@ -42,8 +42,7 @@ class ProfileController
                 }
             }
         }
-        $cat = file_get_contents("https://api.thecatapi.com/v1/images/search");
-        $catPicture = json_decode($cat, true);
+
         require $view;
     }
 }

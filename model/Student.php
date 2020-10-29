@@ -5,6 +5,7 @@ class Student {
     private string $lastName;
     private string $email;
     private string $password;
+    private string $image;
 
     public function __construct(string $firstName, string $lastName, string $email, $password)
     {
@@ -12,6 +13,10 @@ class Student {
         $this->lastName = $lastName;
         $this->email = $email;
         $this->password = $password;
+
+        $cat = file_get_contents("https://api.thecatapi.com/v1/images/search");
+        $catPicture = json_decode($cat, true);
+        $this->image = $catPicture[0]['url'];
     }
 
     public function getFirstName(): string
@@ -32,5 +37,10 @@ class Student {
     public function getPassword(): string
     {
         return $this->password;
+    }
+
+    public function getImage(): string
+    {
+        return $this->image;
     }
 }
