@@ -14,7 +14,7 @@ class ProfileController
     {
         session_start();
 
-        if (!isset($_SESSION['user'])){
+        if (!isset($_SESSION['user']) || $_SESSION['user'] === null){
             $view = 'view/error.php';
         } else {
             $view = 'view/profile.php';
