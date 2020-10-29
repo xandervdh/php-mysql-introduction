@@ -1,6 +1,6 @@
 <?php require 'includes/header.php'; ?>
     <div id="container">
-        <div class="row">
+        <div class="row wrap">
             <?php foreach ($students as $student) : ?>
 
                 <div class="card col-3">
