@@ -12,7 +12,7 @@ require 'model/Connection.php';
 require 'model/Student.php';
 
 //if logged in
-if (isset($_SESSION['user']) && $_SESSION['user'] !== null){
+if (!empty($_SESSION['user'])){
     if (isset($_GET['page']) && $_GET['page'] == 'overview') {
         require 'controller/OverviewController.php';
         $controller = new OverviewController();
@@ -27,11 +27,9 @@ if (isset($_SESSION['user']) && $_SESSION['user'] !== null){
     if (isset($_GET['page']) && $_GET['page'] == 'login') {
         require 'controller/LoginController.php';
         $controller = new LoginController();
-    } else {
-        require 'controller/RegisterController.php';
-        $controller = new RegisterController();
     }
-} else { //yeet to register if you are not logged in and try to go to a page where you need to be logged in
+}
+if (isset($controller)) { //yeet to register if you are not logged in and try to go to a page where you need to be logged in
     require 'controller/RegisterController.php';
     $controller = new RegisterController();
 }

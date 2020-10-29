@@ -5,6 +5,7 @@ class ProfileController
 {
     public function render()
     {   //check if the user has the same id as profile id
+        $view = 'view/profile.php';
         if (isset($_SESSION['user'])) {
             $show = 'display: none';
             if ($_SESSION['user'] == $_GET['user']) {

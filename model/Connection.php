@@ -61,7 +61,7 @@ class Connection {
         }
     }
 
-    public function getId(string $email)
+    public function getId(string $email): int
     {
         $handler = $this->pdo->prepare('SELECT id FROM students WHERE email = :email');
         $handler->bindValue(':email', $email);

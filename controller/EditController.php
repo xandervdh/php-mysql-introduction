@@ -5,6 +5,7 @@ class EditController
 {
     public function render()
     {
+        $view = 'view/edit.php';
         //set variables
         $connection = new Connection();
         $student = $connection->getProfileEdit();
