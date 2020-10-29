@@ -94,7 +94,7 @@ class EditController
             if (empty($firstNameErrorMessage) && empty($lastNameErrorMessage) && empty($emailErrorMessage) && empty($passwordErrorMessage)) {
                 $connection = new Connection();
                 $connection->updateData($firstName, $lastName, $email);
-                $view = 'view/pfileEdit.php';
+                $view = 'view/profileEdit.php';
             }
         }
 
