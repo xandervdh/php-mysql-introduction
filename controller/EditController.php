@@ -5,11 +5,7 @@ class EditController
 {
     public function render()
     {
-        if (!isset($_SESSION['user']) || $_SESSION['user'] === null){
-            $view = 'view/error.php';
-        } else {
-            $view = 'view/edit.php';
-        }
+        //set variables
         $connection = new Connection();
         $student = $connection->getProfileEdit();
         $authorization = new Auth();
@@ -18,13 +14,14 @@ class EditController
         $firstNameError = $lastNameError = $emailError = $passwordError = $passwordConfirmError = $newPasswordError = "";
         $firstNameErrorMessage = $lastNameErrorMessage = $emailErrorMessage = $passwordErrorMessage = $passwordConfirmErrorMessage = $newPasswordErrorMessage = "";
 
+        //if there is a post request
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (empty($_POST['firstName'])) {
                 $firstNameErrorMessage = 'First name is required';
                 $firstNameError = $error;
             } else {
                 $firstName = $this->check_input($_POST['firstName']);
-                $firstNameErrorMessage = $authorization->nameValidation($firstName);
+                $firstNameErrorMessage = $authorization->nameValidation($firstName); //validate first name
                 if (!empty($firstNameErrorMessage)) {
                     $firstNameError = $error;
                 } else {
@@ -37,7 +34,7 @@ class EditController
                 $lastNameError = $error;
             } else {
                 $lastName = $this->check_input($_POST['lastName']);
-                $lastNameErrorMessage = $authorization->nameValidation($lastName);
+                $lastNameErrorMessage = $authorization->nameValidation($lastName); //validate last name
                 if (!empty($lastNameErrorMessage)) {
                     $lastNameError = $error;
                 } else {
@@ -50,11 +47,9 @@ class EditController
                 $emailError = $error;
             } else {
                 $email = $_POST['email'];
-                if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
+                if (!filter_var($email, FILTER_VALIDATE_EMAIL)){ //check if valid email
                     $emailErrorMessage = 'Invalid email adress!';
                     $emailError = $error; //give error style
-                } else {
-                    $_SESSION['email'] = $email;
                 }
             }
 
@@ -63,7 +58,7 @@ class EditController
                 $passwordError = $error;
             } else {
                 $password = $_POST['password'];
-                $passwordError = $authorization->checkPassword($password, $email);
+                $passwordError = $authorization->checkPassword($password, $email); //check if password is the same as database
                 if (!empty($passwordError)){
                     $passwordError = "Password is incorrect!";
                 }
@@ -76,12 +71,13 @@ class EditController
                 } else {
                     $newPassword = password_hash($_POST['newPassword'], PASSWORD_BCRYPT);
                     $passwordConfirm = $_POST['passwordConfirm'];
-                    $newPasswordErrorMessage = $authorization->passwordValidation($newPassword, $passwordConfirm);
+                    $newPasswordErrorMessage = $authorization->passwordValidation($newPassword, $passwordConfirm); //check if password and confirm are equal
                     if (!empty($newPasswordErrorMessage)) {
                         $passwordConfirmError = $error;
                         $newPasswordError = $error;
                         $passwordConfirmErrorMessage = $newPasswordErrorMessage;
                     } else {
+                        //if no errors
                         if (empty($firstNameErrorMessage) && empty($lastNameErrorMessage) && empty($emailErrorMessage) && empty($passwordErrorMessage)) {
                             $connection = new Connection();
                             $connection->updateDataPass($firstName, $lastName, $email, $newPassword);
@@ -90,7 +86,7 @@ class EditController
                     }
                 }
             }
-
+            //if no errors
             if (empty($firstNameErrorMessage) && empty($lastNameErrorMessage) && empty($emailErrorMessage) && empty($passwordErrorMessage)) {
                 $connection = new Connection();
                 $connection->updateData($firstName, $lastName, $email);

@@ -4,13 +4,7 @@ declare(strict_types=1);
 class ProfileController
 {
     public function render()
-    {
-        if (!isset($_SESSION['user']) || $_SESSION['user'] === null){
-            $view = 'view/error.php';
-        } else {
-            $view = 'view/profile.php';
-        }
-
+    {   //check if the user has the same id as profile id
         if (isset($_SESSION['user'])) {
             $show = 'display: none';
             if ($_SESSION['user'] == $_GET['user']) {
@@ -18,15 +12,18 @@ class ProfileController
             }
 
             $connection = new Connection();
-            $student = $connection->getProfile();
+            $student = $connection->getProfile(); //get data for profile
             $id = $connection->getId($student['email']);
 
             if (isset($_POST['action'])) {
+                //check again if user id is the same as profile id
                 if ($id['id'] === $_SESSION['user']) {
+                    //if delete
                     if ($_POST['action'] == 'Delete'){
-                        $connection->deleteProfile(intval($id['id']));
+                        $connection->deleteProfile(intval($id['id'])); //delete profile
                         session_destroy();
                         $view = 'view/delete.php';
+                        //if edit
                     } elseif ($_POST['action'] == 'Edit'){
                         $view = 'view/profileEdit.php';
                     }

@@ -10,14 +10,14 @@ class RegisterController {
         $firstName = $lastName = $email = $password = $passwordConfirm = "";
         $firstNameError = $lastNameError = $emailError = $passwordError = $passwordConfirmError = "";
         $firstNameErrorMessage = $lastNameErrorMessage = $emailErrorMessage = $passwordErrorMessage = $passwordConfirmErrorMessage = "";
-
+        //if post request
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (empty($_POST['firstName'])) {
                 $firstNameErrorMessage = 'First name is required';
                 $firstNameError = $error;
             } else {
                 $firstName = $this->check_input($_POST['firstName']);
-                $firstNameErrorMessage = $authorization->nameValidation($firstName);
+                $firstNameErrorMessage = $authorization->nameValidation($firstName); //validate first name
                 if (!empty($firstNameErrorMessage)) {
                     $firstNameError = $error;
                 } else {
@@ -30,7 +30,7 @@ class RegisterController {
                 $lastNameError = $error;
             } else {
                 $lastName = $this->check_input($_POST['lastName']);
-                $lastNameErrorMessage = $authorization->nameValidation($lastName);
+                $lastNameErrorMessage = $authorization->nameValidation($lastName); //validate last name
                 if (!empty($lastNameErrorMessage)) {
                     $lastNameError = $error;
                 } else {
@@ -43,15 +43,13 @@ class RegisterController {
                 $emailError = $error;
             } else {
                 $email = $_POST['email'];
-                if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
+                if (!filter_var($email, FILTER_VALIDATE_EMAIL)){ //check if email is valid
                     $emailErrorMessage = 'Invalid email adress!';
                     $emailError = $error;
                 } else {
-                    $emailErrorMessage = $authorization->emailValidation($email);
-                    if (!empty($emailErrorMessage)) { //check if input has a valid email
-                        $emailError = $error; //give error style
-                    } else {
-                        $_SESSION['email'] = $email;
+                    $emailErrorMessage = $authorization->emailValidation($email); //check if email already exists in database
+                    if (!empty($emailErrorMessage)) {
+                        $emailError = $error;
                     }
                 }
             }
@@ -66,10 +64,11 @@ class RegisterController {
                 $passwordConfirmError = $error;
             }
 
+            //if password and confirm are filled in
             if (empty($passwordConfirmErrorMessage) && empty($passwordErrorMessage)) {
-                $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
-                $passwordConfirm = $_POST['passwordConfirm'];
-                $passwordErrorMessage = $authorization->passwordValidation($password, $passwordConfirm);
+                $password = password_hash($_POST['password'], PASSWORD_BCRYPT); //hash password
+                $passwordErrorMessage = $authorization->passwordValidation($password, $_POST['passwordConfirm']);
+                //if password and confirm are the same
                 if (!empty($passwordErrorMessage)) {
                     $passwordConfirmError = $error;
                     $passwordError = $error;
@@ -77,10 +76,11 @@ class RegisterController {
                 }
             }
 
+            //if no errors
             if (empty($firstNameErrorMessage) && empty($lastNameErrorMessage) && empty($emailErrorMessage) && empty($passwordErrorMessage)) {
-                $student = new Student($firstName, $lastName, $email, $password);
+                $student = new Student($firstName, $lastName, $email, $password); //new student object
                 $connection = new Connection();
-                $connection->insertData($student);
+                $connection->insertData($student); //insert data
                 $id = $connection->getId($email);
                 $view = 'view/register_complete.php';
                 $_SESSION['user'] = $id['id'];
