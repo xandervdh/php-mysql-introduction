@@ -1,8 +1,8 @@
 <?php require 'includes/header.php'; ?>
 <div>
+    <a id="overview" class="btn btn-light" href="http://mysqlintroduction.local/?page=overview">Overview</a>
 
     <div class="container" style="margin-top: 20px; margin-bottom: 20px;">
-        <a href="http://mysqlintroduction.local/?page=overview">Overview</a>
         <div class="row panel">
             <div class="col-md-8  col-xs-12">
                 <img alt="profile picture" src="<?php echo $student['image'] ?>" class="img-thumbnail picture hidden-xs" />
