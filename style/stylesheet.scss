@@ -2,6 +2,10 @@
   margin: 50px;
 }
 
+body {
+  background-color: royalblue;
+}
+
 .required {
   color: red;
 }
@@ -9,5 +13,62 @@
 #error {
   width: 100%;
   margin-top: 3%;
+}
+
+#container {
+  width: 90%;
+  margin: auto;
+}
+
+.wrap {
+  margin: 15px;
+}
+
+.card {
+  margin-right: 30px;
+  margin-bottom: 30px;
+  width: 20%;
+  flex: 0 0 23%;
+}
+
+.card-img-top {
+  max-height: 200px;
+  object-fit: cover;
+  object-position: 100% 0;
+}
+
+a {
+  color: red;
+}
+
+* {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.header {
+  margin-left: 10%;
+  margin-top: 70px;
+}
+
+.picture {
+  height: 150px;
+  width: 150px;
+  position: absolute;
+  top: 75px;
+  left: -75px;
+  max-height: 200px;
+  object-fit: cover;
+  object-position: 100% 0;
+}
+
+.picture_mob {
+  position: absolute;
+  width: 35%;
+  left: 35%;
+  bottom: 70%;
+}
+
+#profileButtons {
+  margin-top: 5%;
 }
 
