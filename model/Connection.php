@@ -9,7 +9,7 @@ class Connection {
         $this->pdo = $this->openDB();
     }
 
-
+    //get database connection
     public function openDB()
     {
         $dbhost = "localhost";

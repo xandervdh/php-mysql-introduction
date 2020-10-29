@@ -1,6 +1,6 @@
 <?php
 class Student {
-
+    //set parameters
     private string $firstName;
     private string $lastName;
     private string $email;
@@ -13,7 +13,7 @@ class Student {
         $this->lastName = $lastName;
         $this->email = $email;
         $this->password = $password;
-
+        //get cat image
         $cat = file_get_contents("https://api.thecatapi.com/v1/images/search");
         $catPicture = json_decode($cat, true);
         $this->image = $catPicture[0]['url'];
