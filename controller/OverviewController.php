@@ -11,10 +11,10 @@ class OverviewController {
     public function render()
     {
         session_start();
-        if (isset($_SESSION['user'])){
-            $view = 'view/overview.php';
-        } else {
+        if (!isset($_SESSION['user']) || $_SESSION['user'] === null){
             $view = 'view/error.php';
+        } else {
+            $view = 'view/overview.php';
         }
 
         $connection = new Connection();
