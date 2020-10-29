@@ -85,6 +85,7 @@ class EditController
                         if (empty($firstNameErrorMessage) && empty($lastNameErrorMessage) && empty($emailErrorMessage) && empty($passwordErrorMessage)) {
                             $connection = new Connection();
                             $connection->updateDataPass($firstName, $lastName, $email, $newPassword);
+                            $view = 'view/pfileEdit.php';
                         }
                     }
                 }
@@ -93,6 +94,7 @@ class EditController
             if (empty($firstNameErrorMessage) && empty($lastNameErrorMessage) && empty($emailErrorMessage) && empty($passwordErrorMessage)) {
                 $connection = new Connection();
                 $connection->updateData($firstName, $lastName, $email);
+                $view = 'view/pfileEdit.php';
             }
         }
 

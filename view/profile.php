@@ -13,11 +13,14 @@
                 </div>
             </div>
         </div>
-        <form style="<?php echo $show ?>" id="profileButtons" action="" method="post">
-            <input type="hidden" name="user" value="<?php echo $id['id'] ?>">
+        <div id="profileButtons">
+        <form style="<?php echo $show ?>" action="?edit=<?php echo $id['id'] ?>" method="post">
             <input type="submit" name="action" value="Edit">
+        </form>
+        <form style="<?php echo $show ?>" action="" method="post">
             <input type="submit" name="action" value="Delete">
         </form>
+        </div>
     </div>
 
 </div>

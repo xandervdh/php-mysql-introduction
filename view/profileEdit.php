@@ -1,10 +1,8 @@
 <?php require 'includes/header.php' ?>
 
-<span>Edit profile</span>
+<span>Profile edited</span>
 <div id="form">
-    <form method="post" action="?edit=<?php echo $id['id'] ?>">
-        <input type="submit" value="Click me!">
-    </form>
+    <a href="http://mysqlintroduction.local/?user=<?php echo $_SESSION['user'] ?>">Click here to go back to profile!</a>
 </div>
 
 <?php require 'includes/footer.php' ?>
