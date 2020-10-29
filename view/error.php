@@ -1,7 +1,7 @@
 <?php require 'includes/header.php'; ?>
 
-<div>
-    <span>These are not the droids you're looking for!</span>
+<div id="errorWrapper">
+    <img id="error" src="../recources/error.jpg" alt="this is not the page you're looking for">
 </div>
 
 <?php require 'includes/footer.php'; ?>
