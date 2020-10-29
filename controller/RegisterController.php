@@ -52,11 +52,16 @@ class RegisterController {
                 $emailError = $error;
             } else {
                 $email = $_POST['email'];
-                $emailErrorMessage = $authorization->emailValidation($email);
-                if (!empty($emailErrorMessage)) { //check if input has a valid email
-                    $emailError = $error; //give error style
+                if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
+                    $emailErrorMessage = 'Invalid email adress!';
+                    $emailError = $error;
                 } else {
-                    $_SESSION['email'] = $email;
+                    $emailErrorMessage = $authorization->emailValidation($email);
+                    if (!empty($emailErrorMessage)) { //check if input has a valid email
+                        $emailError = $error; //give error style
+                    } else {
+                        $_SESSION['email'] = $email;
+                    }
                 }
             }
 

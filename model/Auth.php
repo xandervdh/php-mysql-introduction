@@ -11,10 +11,6 @@ class Auth {
 
     public function emailValidation(string $email): string
     {
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
-            return 'Invalid email adress!';
-        }
-
         if ($this->connection->checkEmail($email) == true){
             return 'Email is already in use!';
         }
@@ -39,11 +35,6 @@ class Auth {
 
     public function checkEmail(string $email)
     {
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
-            return 'Invalid email adress!';
-        }
-
-
         if ($this->connection->checkEmail($email) != true){
             return 'Something went wrong!';
         }

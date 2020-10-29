@@ -28,12 +28,18 @@ class LoginController
                 $emailError = $error;
             } else {
                 $email = $_POST['email'];
-                $errorMessage = $authorization->checkEmail($email);
-                if (!empty($errorMessage)) { //check if input has a valid email
-                    $emailError = $error; //give error style
-                    $passwordError = $error;
+                if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
+                    $emailErrorMessage = 'Invalid email adress!';
+                    $emailError = $error;
                 } else {
-                    $_SESSION['email'] = $email;
+                    $emailErrorMessage = $authorization->checkEmail($email);
+                    if (!empty($emailErrorMessage)) { //check if input has a valid email
+                        $passwordErrorMessage = $emailErrorMessage;
+                        $emailError = $error; //give error style
+                        $passwordError = $error;
+                    } else {
+                        $_SESSION['email'] = $email;
+                    }
                 }
             }
 
@@ -51,7 +57,7 @@ class LoginController
                 }
             }
 
-            if (empty($firstNameErrorMessage && $lastNameErrorMessage && $emailErrorMessage)) {
+            if (empty($firstNameErrorMessage) && empty($lastNameErrorMessage) && empty($emailErrorMessage) && empty($errorMessage) && empty($passwordErrorMessage)) {
                 $view = 'view/login_succes.php';
                 $id = $connection->getId($email);
                 $_SESSION['user'] = $id['id'];
