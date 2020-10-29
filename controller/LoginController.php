@@ -37,8 +37,6 @@ class LoginController
                         $passwordErrorMessage = $emailErrorMessage;
                         $emailError = $error; //give error style
                         $passwordError = $error;
-                    } else {
-                        $_SESSION['email'] = $email;
                     }
                 }
             }
@@ -63,7 +61,6 @@ class LoginController
                 $_SESSION['user'] = $id['id'];
             }
         }
-        var_dump($_SESSION);
         require $view;
     }
 

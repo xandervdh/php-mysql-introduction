@@ -1,5 +1,5 @@
 <?php require 'includes/header.php'; ?>
-<?php var_dump($_GET); ?>
+
     <div id="form">
         <form method="post" action="">
             <label for="firstName">First name</label><br>

@@ -1,7 +1,7 @@
 <?php require 'includes/header.php'; ?>
 
 <div>
-    <span>You are not allowed back here!</span>
+    <span>These are not the droids you're looking for!</span>
 </div>
 
 <?php require 'includes/footer.php'; ?>
